@@ -197,12 +197,12 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       mensagem = '';
     });
     try {
-      // Mantém os dados locais disponíveis e tenta atualizar pela nuvem.
+      
       final locais = await BancoLocal.instance.listar();
       List<Produto> lista = locais;
       try {
         final remotos = await Nuvem().listar();
-        // Mantém itens criados localmente que ainda não foram enviados à nuvem.
+        
         final locaisPendentes = locais.where((item) => item.cloudId.isEmpty);
         await BancoLocal.instance.substituirTodos([...remotos, ...locaisPendentes]);
         lista = await BancoLocal.instance.listar();
